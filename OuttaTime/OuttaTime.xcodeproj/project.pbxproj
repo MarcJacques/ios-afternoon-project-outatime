@@ -15,6 +15,8 @@
 		0523BDFB25FD9A2D006F6EE5 /* digital-7.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 0523BDF725FD9A28006F6EE5 /* digital-7.ttf */; };
 		0523BE0025FD9E93006F6EE5 /* TimeCircuitsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0523BDFF25FD9E93006F6EE5 /* TimeCircuitsViewController.swift */; };
 		0523BE0525FD9EB3006F6EE5 /* DatePickerViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0523BE0425FD9EB3006F6EE5 /* DatePickerViewController.swift */; };
+		0523BE0925FDA6C7006F6EE5 /* DatePickerDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0523BE0825FDA6C7006F6EE5 /* DatePickerDelegate.swift */; };
+		0523BE1125FE6131006F6EE5 /* TimeTravel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0523BE1025FE6131006F6EE5 /* TimeTravel.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -28,6 +30,8 @@
 		0523BDF725FD9A28006F6EE5 /* digital-7.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; name = "digital-7.ttf"; path = "../../../digital-7.ttf"; sourceTree = "<group>"; };
 		0523BDFF25FD9E93006F6EE5 /* TimeCircuitsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = TimeCircuitsViewController.swift; path = ../../../../TimeCircuitsViewController.swift; sourceTree = "<group>"; };
 		0523BE0425FD9EB3006F6EE5 /* DatePickerViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = DatePickerViewController.swift; path = ../../../../DatePickerViewController.swift; sourceTree = "<group>"; };
+		0523BE0825FDA6C7006F6EE5 /* DatePickerDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DatePickerDelegate.swift; sourceTree = "<group>"; };
+		0523BE1025FE6131006F6EE5 /* TimeTravel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TimeTravel.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -92,6 +96,8 @@
 		0523BDFD25FD9E4C006F6EE5 /* Model */ = {
 			isa = PBXGroup;
 			children = (
+				0523BE1025FE6131006F6EE5 /* TimeTravel.swift */,
+				0523BE0825FDA6C7006F6EE5 /* DatePickerDelegate.swift */,
 			);
 			path = Model;
 			sourceTree = "<group>";
@@ -177,7 +183,9 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				0523BE0925FDA6C7006F6EE5 /* DatePickerDelegate.swift in Sources */,
 				0523BE0525FD9EB3006F6EE5 /* DatePickerViewController.swift in Sources */,
+				0523BE1125FE6131006F6EE5 /* TimeTravel.swift in Sources */,
 				0523BDDB25FD9889006F6EE5 /* AppDelegate.swift in Sources */,
 				0523BDDD25FD9889006F6EE5 /* SceneDelegate.swift in Sources */,
 				0523BE0025FD9E93006F6EE5 /* TimeCircuitsViewController.swift in Sources */,

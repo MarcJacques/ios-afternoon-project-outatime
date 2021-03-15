@@ -11,6 +11,7 @@ class DatePickerViewController: UIViewController {
 
     @IBOutlet weak var datePicker: UIDatePicker!
     
+    var delegate: DatePickerDelegate?
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -22,7 +23,8 @@ class DatePickerViewController: UIViewController {
     }
     
     @IBAction func saveTapped(_ sender: UIButton) {
-        
+        delegate?.destinationDateWasChosen(date: datePicker.date)
+        dismiss(animated: true, completion: nil)
     }
     
     /*
