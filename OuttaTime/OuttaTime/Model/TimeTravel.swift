@@ -14,50 +14,94 @@ enum TimeTravelState {
     case reset
 }
 
+enum TimeLocation {
+    case present
+    case past
+}
+
 protocol TimeTravelDelegate: AnyObject {
-    func dateDidUpdate(daysRemaining: DateInterval)
+    func speedDidUpdate()
+    func dateDidUpdate()
     func arrivedToDestination()
+    
 }
 
 class TimeTravel {
     var presentDate: Date
     var travelDestination: Date? //we only have this after user enters date
+    var duration: DateComponents
    
     private var timer: Timer
     private(set) var state: TimeTravelState
+    private(set) var timeLocation: TimeLocation
     
     weak var delegate: TimeTravelDelegate?
-    
+    var dateLogic: TimeTravelDateLogic?
     var mph: Int
+    var mphString: String
     
     init() {
+        presentDate = Date()
+        duration = DateComponents()
         timer = Timer()
         state = .reset
+        timeLocation = .present
         mph = 0
+        mphString = "\(mph) MPH"
+        
     }
     
-    private func startTimer() {
-        timer = Timer.scheduledTimer(timeInterval: 0.1, target: self, selector: #selector(TimeCircuitsViewController.updateLabels), userInfo: nil, repeats: true)
+    func calculateDuration() -> DateComponents {
+        guard let destination = travelDestination else { return DateComponents() }
+        let calendar = NSCalendar.init(calendarIdentifier: .gregorian)
+        guard let totalDuration = calendar?.components(.day, from: presentDate, to: destination, options: .wrapComponents) else { return DateComponents() }
+        
+        return totalDuration
+    }
+    
+    func createCalendarComponents() -> DateComponents {
+        let myCalendar = Calendar.init(identifier: .gregorian)
+         return myCalendar.dateComponents([.year, .month, .day], from: presentDate)
+    }
+    
+    func travelBackInTime() {
+        rampUpTimer()
+        guard let destination = travelDestination else { return }
+        dateLogic = TimeTravelDateLogic(presentDate: presentDate, destinationDate: destination)
+        
+    }
+    
+    private func rampUpTimer() {
+        timer = Timer.scheduledTimer(timeInterval: 0.1, target: self, selector: #selector(updateSpeed), userInfo: nil, repeats: true)
+        
+    }
+    
+    
+    @objc func updateSpeed() {
+        if mph < 88 {
+        mph += 1
+        delegate?.speedDidUpdate()
+        } else if mph == 88 {
+            state = .timeTravel
+            resetTimer()
+        }
+    }
+    
+    private func dateTimer() {
+        timer = Timer.scheduledTimer(timeInterval: 0.1, target: self, selector: #selector(updatePresentDate), userInfo: nil, repeats: true)
+    }
+    
+    @objc func updatePresentDate() {
+        if presentDate != travelDestination {
+            
+        }
         
     }
    
-    func resetTimer() {
+    private func resetTimer() {
         timer.invalidate()
         timer = Timer()
     }
     
-    private func updateTimer(timer: Timer) {
-        
-        if let stopDate = travelDestination {
-            let currentDate = Date()
-            if currentDate <= stopDate {
-                delegate?.dateDidUpdate(daysRemaining: daysRemaining)
-            } else {
-                state = .arrival
-                cancelTimer()
-                self.travelDestination = nil
-                delegate?.arrivedToDestination()
-            }
-        }
-    }
 }
+

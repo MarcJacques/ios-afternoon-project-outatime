@@ -10,6 +10,7 @@
 		0523862E25FFDE1B008B9078 /* DatePickerViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0523862C25FFDE1B008B9078 /* DatePickerViewController.swift */; };
 		0523862F25FFDE1B008B9078 /* TimeCircuitsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0523862D25FFDE1B008B9078 /* TimeCircuitsViewController.swift */; };
 		0523863225FFDE2C008B9078 /* digital-7.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 0523863125FFDE2C008B9078 /* digital-7.ttf */; };
+		052386352600F0DE008B9078 /* TimeTravelDateLogic.swift in Sources */ = {isa = PBXBuildFile; fileRef = 052386342600F0DD008B9078 /* TimeTravelDateLogic.swift */; };
 		0523BDDB25FD9889006F6EE5 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0523BDDA25FD9889006F6EE5 /* AppDelegate.swift */; };
 		0523BDDD25FD9889006F6EE5 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0523BDDC25FD9889006F6EE5 /* SceneDelegate.swift */; };
 		0523BDE225FD9889006F6EE5 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 0523BDE025FD9889006F6EE5 /* Main.storyboard */; };
@@ -23,6 +24,7 @@
 		0523862C25FFDE1B008B9078 /* DatePickerViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DatePickerViewController.swift; sourceTree = "<group>"; };
 		0523862D25FFDE1B008B9078 /* TimeCircuitsViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TimeCircuitsViewController.swift; sourceTree = "<group>"; };
 		0523863125FFDE2C008B9078 /* digital-7.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "digital-7.ttf"; sourceTree = "<group>"; };
+		052386342600F0DD008B9078 /* TimeTravelDateLogic.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TimeTravelDateLogic.swift; sourceTree = "<group>"; };
 		0523BDD725FD9889006F6EE5 /* OuttaTime.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = OuttaTime.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		0523BDDA25FD9889006F6EE5 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		0523BDDC25FD9889006F6EE5 /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -107,6 +109,7 @@
 			children = (
 				0523BE1025FE6131006F6EE5 /* TimeTravel.swift */,
 				0523BE0825FDA6C7006F6EE5 /* DatePickerDelegate.swift */,
+				052386342600F0DD008B9078 /* TimeTravelDateLogic.swift */,
 			);
 			path = Model;
 			sourceTree = "<group>";
@@ -184,6 +187,7 @@
 			files = (
 				0523862F25FFDE1B008B9078 /* TimeCircuitsViewController.swift in Sources */,
 				0523BE0925FDA6C7006F6EE5 /* DatePickerDelegate.swift in Sources */,
+				052386352600F0DE008B9078 /* TimeTravelDateLogic.swift in Sources */,
 				0523862E25FFDE1B008B9078 /* DatePickerViewController.swift in Sources */,
 				0523BE1125FE6131006F6EE5 /* TimeTravel.swift in Sources */,
 				0523BDDB25FD9889006F6EE5 /* AppDelegate.swift in Sources */,
