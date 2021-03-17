@@ -20,10 +20,8 @@ class TimeCircuitsViewController: UIViewController {
         return formatter
     }
     
-    let rulesOfTimeTravel = TimeTravel()
-    
-    
-    
+    let timeTravel = TimeMachine()
+
     override func viewDidLoad() {
         super.viewDidLoad()
         
@@ -41,66 +39,71 @@ class TimeCircuitsViewController: UIViewController {
                                      handler: nil)
         alert.addAction(okAction)
         present(alert, animated: true, completion: nil)
+        
     }
     
     private func updateViews() {
-        speedLabel.text = "\(rulesOfTimeTravel.mph) MPH"
-        lastTimeDepartedLabel.text = "--- -- ----"
-        presentDateLabel.text = dateFormatter.string(from: Date())
-        updateDestinationLabel()
-    }
-    
-    private func updateDestinationLabel() {
-            if let destination = rulesOfTimeTravel.travelDestination {
-            destinationLabel.text = dateFormatter.string(from: destination)
-            } else {
+        
+        speedLabel.text = timeTravel.mphString
+        lastTimeDepartedLabel.text = timeTravel.lastTimeDeparted.last
+        
+        presentDateLabel.text = timeTravel.dateToString(date: timeTravel.presentDate)
+        
+        if let destination = timeTravel.travelDestination {
+            destinationLabel.text = timeTravel.dateToString(date: destination)
+        } else {
             destinationLabel.text = "--- -- ----"
         }
     }
     
-       
-        @IBAction func setDestinationTapped(_ sender: UIButton) {
-            
-        }
-        
-        @IBAction func travelBackTapped(_ sender: UIButton) {
-            rulesOfTimeTravel.travelBackInTime()
-            
-        }
-        
-        
-        
-        // MARK: - Navigation
-        
-        override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-            
-            if segue.identifier == "DestinationModalSegue" {
-                guard let datepickerVC = segue.destination as? DatePickerViewController else { return }
-                datepickerVC.delegate = self
-            }
-            // Pass the selected object to the new view controller.
-        }
-        
+    
+    @IBAction func setDestinationTapped(_ sender: UIButton) {
         
     }
+    
+    @IBAction func travelBackTapped(_ sender: UIButton) {
+        timeTravel.state = .rampUp
+        timeTravel.timeMachine()
+    }
+    
+    
+    
+    // MARK: - Navigation
+    
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+        
+        if segue.identifier == "DestinationModalSegue" {
+            guard let datepickerVC = segue.destination as? DatePickerViewController else { return }
+            datepickerVC.delegate = self
+        }
+        // Pass the selected object to the new view controller.
+    }
+    
+    
+}
+
 extension TimeCircuitsViewController: TimeTravelDelegate {
     func speedDidUpdate() {
-        speedLabel.text = rulesOfTimeTravel.mphString
+        speedLabel.text = timeTravel.mphString
+        updateViews()
     }
     
-    func dateDidUpdate() {
-        presentDateLabel.text = dateFormatter.string(from: rulesOfTimeTravel.presentDate)
+    func updatingPresent() {
+        updateViews()
     }
     
-    func arrivedToDestination(){
+    func arrivedToDestination() {
+        timeTravel.presentDayLogic()
+        updateViews()
         showAlert()
+        
     }
 }
 
-extension TimeCircuitsViewController: DatePickerDelegate, UIPickerViewDelegate {
+extension TimeCircuitsViewController: DatePickerDelegate {
     
     func destinationDateWasChosen(date: Date) {
-        rulesOfTimeTravel.travelDestination = date
+        timeTravel.travelDestination = date
         updateViews()
     }
 }

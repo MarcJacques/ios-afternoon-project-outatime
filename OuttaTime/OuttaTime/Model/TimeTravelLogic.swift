@@ -21,30 +21,34 @@ enum Months: String, CaseIterable {
     case NOV
     case DEC
 }
-
-protocol DateUpdatedDelegate {
-    func presentHasBeenUpdated()
-    func finishedUpdatingPresent()
+enum TimeMachineState {
+    case rampUp
+    case timeTravel
+    case arrival
+    case off
 }
 
-struct TimeTravelDateLogic {
-//    var months: [Int]
-//    var monthString: Months.RawValue
-//    var days: [String] = Array(1...31).map { String($0) }
-//    var year: Int
-    
-//    var delegate: DateUpdatedDelegate?
-    
-//    var realCurrentDate: Date
-    var presentDate: Date
-    var destinationDate: Date
-    
-    func destinationDateMath(destinationDate: Date?, presentDate: Date?) {
-        guard let date1 = destinationDate,
-              let date2 = presentDate else { return }
+enum TimeLocation {
+    case present
+    case past
+    case lostInTime
+}
+
+protocol TimeTravelDelegate: AnyObject {
+    func speedDidUpdate()
+    func updatingPresent()
+    func arrivedToDestination()
+}
+
+class TimeTravelLogic {
+
+    weak var delegate: TimeTravelDelegate?
+   
+
+    func destinationDateMath(destinationDate: Date, presentDate: Date) -> Date {
         
-        let destination = dateToIntegerArray(date: date1)
-        let present = dateToIntegerArray(date: date2)
+        let destination = dateToIntegerArray(date: destinationDate)
+        let present = dateToIntegerArray(date: presentDate)
         var updatingPresent: [Int] = []
         
         if present[2] != destination[2] {
@@ -55,12 +59,26 @@ struct TimeTravelDateLogic {
             updatingPresent[0] = monthMath(destination: destination[0], present: updatingPresent[0])
         }
         
-        if updatingPresent[1] != destination[2] {
+        if updatingPresent[1] != destination[1] {
             updatingPresent[1] = dayMath(present: updatingPresent[1], destination: destination[2])
         }
+        return updatePresent(present: updatingPresent)
     }
     
-    private func dayMath(present: Int, destination: Int)-> Int {
+    func dateToString(date: Date) -> String {
+        let dateFormatter = DateFormatter()
+        dateFormatter.dateFormat = "MMM dd yyyy"
+        return dateFormatter.string(from: date)
+    }
+    
+    func stringToDate(dateString: String) -> Date {
+        let formatter = DateFormatter()
+        formatter.dateFormat = "MMM dd yyyy"
+        guard let date = formatter.date(from: dateString) else { return Date() }
+        return date
+    }
+   
+    private func dayMath(present: Int, destination: Int) -> Int {
         var dayTracker = present
         
         if dayTracker != destination {
@@ -69,11 +87,10 @@ struct TimeTravelDateLogic {
             } else if dayTracker <= 31 {
                 dayTracker -= 1
             }
-            #warning("updatePresentLabel use protocol")
+            delegate?.updatingPresent()
             return dayMath(present: dayTracker, destination: destination)
         }
         return dayTracker
-        
     }
     
     private func monthMath(destination: Int, present: Int) -> Int {
@@ -85,7 +102,7 @@ struct TimeTravelDateLogic {
             } else if monthTracker <= 12 {
                 monthTracker -= 1
             }
-            #warning("update presentLabel use protocol")
+            delegate?.updatingPresent()
             return monthMath(destination: destination, present: monthTracker)
         }
         
@@ -93,20 +110,20 @@ struct TimeTravelDateLogic {
     }
     
     
-    private mutating func updatePresent(present: [Int]) {
+    private func updatePresent(present: [Int]) -> Date {
         var components = DateComponents()
         components.year = present[2]
         components.month = present[0]
         components.day = present[1]
-        guard let newDate = Calendar.current.date(from: components) else { return  }
-        presentDate = newDate
+        guard let newDate = Calendar.current.date(from: components) else { return Date() }
+        return newDate
     }
     
     private func yearMath(destination: [Int], present: [Int]) -> [Int] {
         var yearTracker = present
         if destination[2] < present[2] {
             yearTracker[2] -= 1
-            #warning("update present label, use protocol")
+            delegate?.updatingPresent()
             return yearMath(destination: destination, present: yearTracker)
         } else {
             return yearTracker
@@ -114,7 +131,7 @@ struct TimeTravelDateLogic {
     }
     
     
-    func dateToIntegerArray(date: Date) -> [Int] {
+    private func dateToIntegerArray(date: Date) -> [Int] {
         let formatter = DateFormatter()
         formatter.dateFormat = "MMM dd yyyy"
         

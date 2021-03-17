@@ -100,7 +100,7 @@
                                                 <state key="normal" title="SET DESTINATION TIME"/>
                                                 <connections>
                                                     <action selector="setDestinationTapped:" destination="wGe-1z-wlB" eventType="touchUpInside" id="Py1-Eu-2lt"/>
-                                                    <segue destination="iaH-cG-XZi" kind="modal" identifier="DestinationModalSegue" id="fhp-bn-EdJ"/>
+                                                    <segue destination="iaH-cG-XZi" kind="presentation" identifier="DestinationModalSegue" id="fhp-bn-EdJ"/>
                                                 </connections>
                                             </button>
                                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="i6d-bA-WxF">
