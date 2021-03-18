@@ -35,7 +35,7 @@ enum TimeLocation {
 }
 
 protocol TimeTravelDelegate: AnyObject {
-    func speedDidUpdate()
+    func speedDidUpdate(speed: Int)
     func updatingPresent()
     func arrivedToDestination()
 }

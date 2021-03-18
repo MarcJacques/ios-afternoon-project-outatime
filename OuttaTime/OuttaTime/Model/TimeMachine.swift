@@ -12,31 +12,31 @@ class TimeMachine: TimeTravelLogic {
     var presentDate: Date
     var travelDestination: Date? //we only have this after user enters date
     var duration: DateComponents
-    var lastTimeDeparted: [String]
+    var lastTimeDeparted: [String]?
+    var lastTimeDepartedString: String
     
     private var timer: Timer?
-    var state: TimeMachineState
+    private(set) var state: TimeMachineState
     private(set) var timeLocation: TimeLocation
     
     var mph: Int
-    var mphString: String
     
     override init() {
         lastTimeDeparted = []
+        lastTimeDepartedString = "\(lastTimeDeparted?.last ?? "--- -- ----" )"
         presentDate = Date()
         duration = DateComponents()
         timer = nil
         state = .off
         timeLocation = .present
         mph = 0
-        mphString = "\(mph) MPH"
+
     }
     
     func presentDayLogic() {
         switch timeLocation {
         case .past:
-            guard let presentString = lastTimeDeparted.last else { return }
-                  let present = stringToDate(dateString: presentString)
+            let present = stringToDate(dateString: lastTimeDepartedString)
             presentDate = present
         case .lostInTime:
             print("Something must be wrong with the Flux Capacitor!")
@@ -63,46 +63,47 @@ class TimeMachine: TimeTravelLogic {
     func timeMachine() {
         
         switch state {
+        case .off:
+            self.state = .rampUp
         case .rampUp:
-            lastTimeDeparted.append(dateToString(date: presentDate))
-            timer = Timer.scheduledTimer(timeInterval: 0.1,
-                                         target: self,
-                                         selector: #selector(updateSpeed),
-                                         userInfo: nil,
-                                         repeats: true)
+            lastTimeDeparted?.append(dateToString(date: presentDate))
+            
+            resetTimer()
+            timer = Timer.scheduledTimer(withTimeInterval: 0.1,
+                                         repeats: true,
+                                         block: updateSpeed(timer:))
             
         case .timeTravel:
-            timer = Timer.scheduledTimer(timeInterval: 0.1,
-                                         target: self,
-                                         selector: #selector(updatePresentDate),
-                                         userInfo: nil, repeats: true)
+            resetTimer()
+            timer = Timer.scheduledTimer(withTimeInterval: 0.1,
+                                         repeats: true,
+                                         block: updatePresentDate(timer:))
         
         case .arrival:
-            self.delegate?.arrivedToDestination()
             state = .off
-        
-        default:
             resetTimer()
-            
+            mph = 0
+            delegate?.speedDidUpdate(speed: mph)
+            delegate?.arrivedToDestination()
+    
         }
     }
     
-    @objc func updateSpeed() {
-        if mph < 88 {
-            mph += 1
-            delegate?.speedDidUpdate()
-        } else if mph == 88 {
+    private func updateSpeed(timer: Timer) {
+        mph += 1
+        if mph == 88 {
             resetTimer()
             state = .timeTravel
             timeMachine()
         }
+        delegate?.speedDidUpdate(speed: mph)
     }
     
-    @objc func updatePresentDate() {
+    private func updatePresentDate(timer: Timer) {
         guard let destination = travelDestination else { return }
         
         if presentDate != destination {
-            presentDate = self.destinationDateMath(destinationDate: destination, presentDate: presentDate)
+            presentDate = destinationDateMath(destinationDate: destination, presentDate: presentDate)
         } else if presentDate == travelDestination {
             state = .arrival
             timeMachine()

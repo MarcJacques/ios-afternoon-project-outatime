@@ -14,11 +14,11 @@ class TimeCircuitsViewController: UIViewController {
     @IBOutlet weak var lastTimeDepartedLabel: UILabel!
     @IBOutlet weak var speedLabel: UILabel!
     
-    private var dateFormatter: DateFormatter {
-        let formatter = DateFormatter()
-        formatter.dateFormat = "MMM dd yyyy"
-        return formatter
-    }
+//    private var dateFormatter: DateFormatter {
+//        let formatter = DateFormatter()
+//        formatter.dateFormat = "MMM dd yyyy"
+//        return formatter
+//    }
     
     let timeTravel = TimeMachine()
 
@@ -26,6 +26,7 @@ class TimeCircuitsViewController: UIViewController {
         super.viewDidLoad()
         
         updateViews()
+        timeTravel.delegate = self
         
     }
     
@@ -43,26 +44,35 @@ class TimeCircuitsViewController: UIViewController {
     }
     
     private func updateViews() {
-        
-        speedLabel.text = timeTravel.mphString
-        lastTimeDepartedLabel.text = timeTravel.lastTimeDeparted.last
-        
-        presentDateLabel.text = timeTravel.dateToString(date: timeTravel.presentDate)
-        
-        if let destination = timeTravel.travelDestination {
-            destinationLabel.text = timeTravel.dateToString(date: destination)
-        } else {
-            destinationLabel.text = "--- -- ----"
+        switch timeTravel.state {
+        case .rampUp:
+            speedLabel.text = mphString()
+        case .timeTravel:
+            presentDateLabel.text = timeTravel.dateToString(date: timeTravel.presentDate)
+        case .arrival:
+            presentDateLabel.text = timeTravel.dateToString(date: timeTravel.presentDate)
+            lastTimeDepartedLabel.text = timeTravel.lastTimeDepartedString
+        default:
+            presentDateLabel.text = timeTravel.dateToString(date: timeTravel.presentDate)
+            speedLabel.text = "\(timeTravel.mph) MPH"
+            if let destination = timeTravel.travelDestination {
+                destinationLabel.text = timeTravel.dateToString(date: destination)
+            } else {
+                destinationLabel.text = "--- -- ----"
+            }
         }
     }
     
+    func mphString() -> String {
+        return "\(timeTravel.mph) MPH"
+    }
     
     @IBAction func setDestinationTapped(_ sender: UIButton) {
         
     }
     
     @IBAction func travelBackTapped(_ sender: UIButton) {
-        timeTravel.state = .rampUp
+
         timeTravel.timeMachine()
     }
     
@@ -83,8 +93,8 @@ class TimeCircuitsViewController: UIViewController {
 }
 
 extension TimeCircuitsViewController: TimeTravelDelegate {
-    func speedDidUpdate() {
-        speedLabel.text = timeTravel.mphString
+    func speedDidUpdate(speed: Int) {
+        
         updateViews()
     }
     
