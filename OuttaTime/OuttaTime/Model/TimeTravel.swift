@@ -8,7 +8,7 @@
 import Foundation
 
 protocol TimeLogicDelegate: AnyObject {
-    func speedDidUpdate()
+    func getUpToSpeed()
     
 }
 
@@ -18,15 +18,30 @@ class TimeTravel {
     var present: Date
     var lastTimeDeparted: [Date]
     
-    var timer: Timer
+    var timer: Timer?
     
     var delegate: TimeLogicDelegate?
     
     init() {
         present = Date()
-        timer = Timer()
+        timer = nil
        
         lastTimeDeparted = []
+    }
+    
+    func startTimeTravel() {
+        resetTimer()
+        timer = Timer.scheduledTimer(withTimeInterval: 0.1,
+                                     repeats: true ) { timer in self.updateSpeed() }
+    }
+    
+    func resetTimer() {
+        timer?.invalidate()
+        timer = nil
+    }
+    
+    func updateSpeed() {
+        delegate?.getUpToSpeed()
     }
     
     

@@ -25,6 +25,7 @@ class NewTimeCircuitsViewController: UIViewController {
     
     var destinationString = "--- -- ----"
     var lastTimeDepartedString = "--- -- ----"
+    var speedString = ""
     
     @IBOutlet weak var destinationLabel: UILabel!
     @IBOutlet weak var presentDateLabel: UILabel!
@@ -43,10 +44,12 @@ class NewTimeCircuitsViewController: UIViewController {
     //    MARK: - Methods
     
     func updateViews() {
+        speedString = "\(speed) MPH"
+        
         destinationLabel.text = destinationString
         presentDateLabel.text = presentDay()
         lastTimeDepartedLabel.text = lastTimeDepartedString
-        speedLabel.text = speedString()
+        speedLabel.text = speedString
     }
     
     func dateToString(date: Date) -> String {
@@ -65,20 +68,20 @@ class NewTimeCircuitsViewController: UIViewController {
         }
     }
     
-    func speedString() -> String {
-        
-        switch state {
-        case .timeTravel:
+    func speedCheck() {
+        if speed != 88 {
             speed += 1
-        default:
-            speed = 0
+            updateViews()
+        } else {
+            state = .timeTravel
+            //            timeLogic.startTimeTravel()
+            
         }
-        
-        return "\(speed) MPH"
     }
     
+    
     @IBAction func travelBackTapped(_ sender: UIButton) {
-        
+        timeLogic.startTimeTravel()
     }
     
     
@@ -95,9 +98,8 @@ class NewTimeCircuitsViewController: UIViewController {
 
 extension NewTimeCircuitsViewController: TimeLogicDelegate {
     
-    func speedDidUpdate() {
-        speed += 1
-        updateViews()
+    func getUpToSpeed() {
+        speedCheck()
     }
     
     
@@ -107,6 +109,7 @@ extension NewTimeCircuitsViewController: DatePickerDelegate {
     
     func destinationSet(destination: Date) {
         destinationString = dateToString(date: destination)
+        state = .destinationSet
         updateViews()
     }
     
