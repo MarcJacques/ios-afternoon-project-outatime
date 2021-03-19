@@ -14,12 +14,7 @@ class TimeCircuitsViewController: UIViewController {
     @IBOutlet weak var lastTimeDepartedLabel: UILabel!
     @IBOutlet weak var speedLabel: UILabel!
     
-//    private var dateFormatter: DateFormatter {
-//        let formatter = DateFormatter()
-//        formatter.dateFormat = "MMM dd yyyy"
-//        return formatter
-//    }
-    
+  
     let timeTravel = TimeMachine()
 
     override func viewDidLoad() {
@@ -84,7 +79,7 @@ class TimeCircuitsViewController: UIViewController {
         
         if segue.identifier == "DestinationModalSegue" {
             guard let datepickerVC = segue.destination as? DatePickerViewController else { return }
-            datepickerVC.delegate = self
+//            datepickerVC.delegate = self
         }
         // Pass the selected object to the new view controller.
     }
@@ -110,10 +105,10 @@ extension TimeCircuitsViewController: TimeTravelDelegate {
     }
 }
 
-extension TimeCircuitsViewController: DatePickerDelegate {
-    
-    func destinationDateWasChosen(date: Date) {
-        timeTravel.travelDestination = date
-        updateViews()
-    }
-}
+//extension TimeCircuitsViewController: DatePickerDelegate {
+//
+//    func destinationDateWasChosen(date: Date) {
+//        timeTravel.travelDestination = date
+//        updateViews()
+//    }
+//}

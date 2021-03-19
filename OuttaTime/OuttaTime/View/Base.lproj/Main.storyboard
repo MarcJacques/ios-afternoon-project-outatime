@@ -13,10 +13,10 @@
         </array>
     </customFonts>
     <scenes>
-        <!--Time Circuits View Controller-->
+        <!--New Time Circuits View Controller-->
         <scene sceneID="6Jh-3f-wbu">
             <objects>
-                <viewController id="wGe-1z-wlB" customClass="TimeCircuitsViewController" customModule="OuttaTime" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController id="wGe-1z-wlB" customClass="NewTimeCircuitsViewController" customModule="OuttaTime" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="f99-Ff-yzB">
                         <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -99,7 +99,6 @@
                                                 <rect key="frame" x="0.0" y="0.0" width="167" height="31"/>
                                                 <state key="normal" title="SET DESTINATION TIME"/>
                                                 <connections>
-                                                    <action selector="setDestinationTapped:" destination="wGe-1z-wlB" eventType="touchUpInside" id="Py1-Eu-2lt"/>
                                                     <segue destination="iaH-cG-XZi" kind="presentation" identifier="DestinationModalSegue" id="fhp-bn-EdJ"/>
                                                 </connections>
                                             </button>
@@ -107,7 +106,7 @@
                                                 <rect key="frame" x="34.5" y="48" width="98" height="30"/>
                                                 <state key="normal" title="TRAVEL BACK"/>
                                                 <connections>
-                                                    <action selector="travelBackTapped:" destination="wGe-1z-wlB" eventType="touchUpInside" id="ioU-46-c8x"/>
+                                                    <action selector="travelBackTapped:" destination="wGe-1z-wlB" eventType="touchUpInside" id="Tzx-2s-EmL"/>
                                                 </connections>
                                             </button>
                                         </subviews>
@@ -125,10 +124,10 @@
                         </constraints>
                     </view>
                     <connections>
-                        <outlet property="destinationLabel" destination="TxG-nM-UNv" id="2kB-63-r24"/>
-                        <outlet property="lastTimeDepartedLabel" destination="xQ0-n0-lLw" id="xmv-kW-O5N"/>
-                        <outlet property="presentDateLabel" destination="Qwv-gS-XGQ" id="gFU-nK-g9L"/>
-                        <outlet property="speedLabel" destination="Vyn-2Q-hbm" id="JXg-1n-QXN"/>
+                        <outlet property="destinationLabel" destination="TxG-nM-UNv" id="lbG-M4-vbc"/>
+                        <outlet property="lastTimeDepartedLabel" destination="xQ0-n0-lLw" id="BIE-2T-HCR"/>
+                        <outlet property="presentDateLabel" destination="Qwv-gS-XGQ" id="fUc-NU-R6F"/>
+                        <outlet property="speedLabel" destination="Vyn-2Q-hbm" id="psi-Ae-Wjk"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="51d-Mp-QJB" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
@@ -150,14 +149,14 @@
                                 <rect key="frame" x="19" y="778" width="48" height="30"/>
                                 <state key="normal" title="Cancel"/>
                                 <connections>
-                                    <action selector="cancelTapped:" destination="iaH-cG-XZi" eventType="touchUpInside" id="FJl-40-XHK"/>
+                                    <action selector="cancelTapped:" destination="iaH-cG-XZi" eventType="touchUpInside" id="EHI-Yk-qVJ"/>
                                 </connections>
                             </button>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="B6A-1n-AQG">
                                 <rect key="frame" x="353" y="778" width="37" height="30"/>
                                 <state key="normal" title="Done"/>
                                 <connections>
-                                    <action selector="saveTapped:" destination="iaH-cG-XZi" eventType="touchUpInside" id="eoY-Z3-HCN"/>
+                                    <action selector="saveTapped:" destination="iaH-cG-XZi" eventType="touchUpInside" id="A8O-vf-reh"/>
                                 </connections>
                             </button>
                         </subviews>
@@ -177,7 +176,7 @@
                     </view>
                     <navigationItem key="navigationItem" id="8H2-Mz-wFS"/>
                     <connections>
-                        <outlet property="datePicker" destination="aoq-s4-Xbd" id="Lth-PA-5Lw"/>
+                        <outlet property="datePicker" destination="aoq-s4-Xbd" id="7ZR-T5-MWk"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="3eA-4n-qkT" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>

@@ -9,6 +9,6 @@ import Foundation
 
 
 protocol DatePickerDelegate {
-    func destinationDateWasChosen(date: Date)
+    func destinationSet(destination: Date)
     
 }

@@ -18,6 +18,8 @@
 		0523BDE725FD988B006F6EE5 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 0523BDE525FD988B006F6EE5 /* LaunchScreen.storyboard */; };
 		0523BE0925FDA6C7006F6EE5 /* DatePickerDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0523BE0825FDA6C7006F6EE5 /* DatePickerDelegate.swift */; };
 		0523BE1125FE6131006F6EE5 /* TimeMachine.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0523BE1025FE6131006F6EE5 /* TimeMachine.swift */; };
+		05A078A72605045600F2C9F3 /* TimeTravel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 05A078A62605045600F2C9F3 /* TimeTravel.swift */; };
+		05A078AA260518E700F2C9F3 /* NewTimeCircuitsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 05A078A9260518E700F2C9F3 /* NewTimeCircuitsViewController.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -34,6 +36,8 @@
 		0523BDE825FD988B006F6EE5 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		0523BE0825FDA6C7006F6EE5 /* DatePickerDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DatePickerDelegate.swift; sourceTree = "<group>"; };
 		0523BE1025FE6131006F6EE5 /* TimeMachine.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TimeMachine.swift; sourceTree = "<group>"; };
+		05A078A62605045600F2C9F3 /* TimeTravel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TimeTravel.swift; sourceTree = "<group>"; };
+		05A078A9260518E700F2C9F3 /* NewTimeCircuitsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NewTimeCircuitsViewController.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -60,6 +64,7 @@
 			children = (
 				0523862C25FFDE1B008B9078 /* DatePickerViewController.swift */,
 				0523862D25FFDE1B008B9078 /* TimeCircuitsViewController.swift */,
+				05A078A9260518E700F2C9F3 /* NewTimeCircuitsViewController.swift */,
 			);
 			path = Controller;
 			sourceTree = "<group>";
@@ -110,6 +115,7 @@
 				0523BE1025FE6131006F6EE5 /* TimeMachine.swift */,
 				0523BE0825FDA6C7006F6EE5 /* DatePickerDelegate.swift */,
 				052386342600F0DD008B9078 /* TimeTravelLogic.swift */,
+				05A078A62605045600F2C9F3 /* TimeTravel.swift */,
 			);
 			path = Model;
 			sourceTree = "<group>";
@@ -192,6 +198,8 @@
 				0523BE1125FE6131006F6EE5 /* TimeMachine.swift in Sources */,
 				0523BDDB25FD9889006F6EE5 /* AppDelegate.swift in Sources */,
 				0523BDDD25FD9889006F6EE5 /* SceneDelegate.swift in Sources */,
+				05A078AA260518E700F2C9F3 /* NewTimeCircuitsViewController.swift in Sources */,
+				05A078A72605045600F2C9F3 /* TimeTravel.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
